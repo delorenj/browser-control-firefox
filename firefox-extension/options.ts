@@ -36,16 +36,11 @@ const domainStatusElement = document.getElementById(
 ) as HTMLDivElement;
 const hostInput = document.getElementById("host-input") as HTMLInputElement;
 const portsInput = document.getElementById("ports-input") as HTMLInputElement;
-<<<<<<< HEAD
-const savePortsButton = document.getElementById("save-ports") as HTMLButtonElement;
-const portsStatusElement = document.getElementById("ports-status") as HTMLDivElement;
+const saveConnectionButton = document.getElementById("save-connection") as HTMLButtonElement;
+const connectionStatusElement = document.getElementById("connection-status") as HTMLDivElement;
 const auditLogContainer = document.getElementById("audit-log-container") as HTMLDivElement;
 const clearAuditLogButton = document.getElementById("clear-audit-log") as HTMLButtonElement;
 const auditLogStatusElement = document.getElementById("audit-log-status") as HTMLDivElement;
-=======
-const saveConnectionButton = document.getElementById("save-connection") as HTMLButtonElement;
-const connectionStatusElement = document.getElementById("connection-status") as HTMLDivElement;
->>>>>>> feature/remote-mcp-server-connection
 
 /**
  * Loads the secret from storage and displays it
