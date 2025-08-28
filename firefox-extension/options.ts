@@ -10,9 +10,14 @@ import {
   setDomainDenyList,
   getPorts,
   setPorts,
+<<<<<<< HEAD
   getAuditLog,
   clearAuditLog,
   getToolNameById,
+=======
+  getHost,
+  setHost,
+>>>>>>> feature/remote-mcp-server-connection
 } from "./extension-config";
 
 const secretDisplay = document.getElementById(
@@ -32,12 +37,18 @@ const saveDomainListsButton = document.getElementById(
 const domainStatusElement = document.getElementById(
   "domain-status"
 ) as HTMLDivElement;
+const hostInput = document.getElementById("host-input") as HTMLInputElement;
 const portsInput = document.getElementById("ports-input") as HTMLInputElement;
+<<<<<<< HEAD
 const savePortsButton = document.getElementById("save-ports") as HTMLButtonElement;
 const portsStatusElement = document.getElementById("ports-status") as HTMLDivElement;
 const auditLogContainer = document.getElementById("audit-log-container") as HTMLDivElement;
 const clearAuditLogButton = document.getElementById("clear-audit-log") as HTMLButtonElement;
 const auditLogStatusElement = document.getElementById("audit-log-status") as HTMLDivElement;
+=======
+const saveConnectionButton = document.getElementById("save-connection") as HTMLButtonElement;
+const connectionStatusElement = document.getElementById("connection-status") as HTMLDivElement;
+>>>>>>> feature/remote-mcp-server-connection
 
 /**
  * Loads the secret from storage and displays it
@@ -236,33 +247,47 @@ async function saveDomainLists(event: MouseEvent) {
 }
 
 /**
- * Loads the ports from storage and displays them
+ * Loads the connection settings from storage and displays them
  */
-async function loadPorts() {
+async function loadConnectionSettings() {
   try {
+    const host = await getHost();
     const ports = await getPorts();
+    hostInput.value = host;
     portsInput.value = ports.join(", ");
   } catch (error) {
-    console.error("Error loading ports:", error);
-    portsStatusElement.textContent =
-      "Error loading ports. Please check console for details.";
-    portsStatusElement.style.color = "red";
+    console.error("Error loading connection settings:", error);
+    connectionStatusElement.textContent =
+      "Error loading connection settings. Please check console for details.";
+    connectionStatusElement.style.color = "red";
     setTimeout(() => {
-      portsStatusElement.textContent = "";
-      portsStatusElement.style.color = "";
+      connectionStatusElement.textContent = "";
+      connectionStatusElement.style.color = "";
     }, 3000);
   }
 }
 
 /**
- * Saves the ports to storage
+ * Saves the connection settings to storage
  */
-async function savePorts(event: MouseEvent) {
+async function saveConnectionSettings(event: MouseEvent) {
   if (!event.isTrusted) {
     return;
   }
 
   try {
+    // Validate host
+    const host = hostInput.value.trim();
+    if (!host) {
+      throw new Error("Host cannot be empty.");
+    }
+
+    // Basic validation for host format (hostname or IP address)
+    const hostRegex = /^([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)*[a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?$|^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+    if (!hostRegex.test(host)) {
+      throw new Error("Invalid host format. Please enter a valid hostname or IP address.");
+    }
+
     // Parse ports (split by commas and filter out empty values)
     const portsText = portsInput.value.trim();
     const portStrings = portsText
@@ -288,18 +313,25 @@ async function savePorts(event: MouseEvent) {
     }
 
     // Save to storage
+    await setHost(host);
     await setPorts(ports);
 
-    // Reload the extension:
-    browser.runtime.reload();
-  } catch (error) {
-    console.error("Error saving ports:", error);
-    portsStatusElement.textContent = error instanceof Error ? error.message : "Failed to save ports";
-    portsStatusElement.style.color = "red";
+    // Show success message
+    connectionStatusElement.textContent = "Connection settings saved successfully! Reloading extension...";
+    connectionStatusElement.style.color = "#4caf50";
+    
+    // Reload the extension after a short delay
     setTimeout(() => {
-      portsStatusElement.textContent = "";
-      portsStatusElement.style.color = "";
-    }, 3000);
+      browser.runtime.reload();
+    }, 1500);
+  } catch (error) {
+    console.error("Error saving connection settings:", error);
+    connectionStatusElement.textContent = error instanceof Error ? error.message : "Failed to save connection settings";
+    connectionStatusElement.style.color = "red";
+    setTimeout(() => {
+      connectionStatusElement.textContent = "";
+      connectionStatusElement.style.color = "";
+    }, 5000);
   }
 }
 
@@ -577,14 +609,22 @@ function hidePermissionModal() {
 // Initialize the page
 copyButton.addEventListener("click", copyToClipboard);
 saveDomainListsButton.addEventListener("click", saveDomainLists);
+<<<<<<< HEAD
 savePortsButton.addEventListener("click", savePorts);
 clearAuditLogButton.addEventListener("click", handleClearAuditLog);
+=======
+saveConnectionButton.addEventListener("click", saveConnectionSettings);
+>>>>>>> feature/remote-mcp-server-connection
 document.addEventListener("DOMContentLoaded", () => {
   loadSecret();
   createToolSettingsUI();
   loadDomainLists();
+<<<<<<< HEAD
   loadPorts();
   loadAuditLog();
+=======
+  loadConnectionSettings();
+>>>>>>> feature/remote-mcp-server-connection
   initializeCollapsibleSections();
 
   // Ensure modal is hidden by default

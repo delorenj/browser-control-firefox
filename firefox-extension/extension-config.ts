@@ -83,7 +83,11 @@ export interface ExtensionConfig {
   toolSettings?: ToolSettings;
   domainDenyList?: string[];
   ports: number[];
+<<<<<<< HEAD
   auditLog?: AuditLogEntry[];
+=======
+  host?: string;
+>>>>>>> feature/remote-mcp-server-connection
 }
 
 /**
@@ -112,6 +116,10 @@ export async function getConfig(): Promise<ExtensionConfig> {
 
   if (!config.ports) {
     config.ports = [DEFAULT_WS_PORT];
+  }
+
+  if (!config.host) {
+    config.host = "localhost";
   }
   
   return config;
@@ -266,6 +274,7 @@ export async function setPorts(ports: number[]): Promise<void> {
 }
 
 /**
+<<<<<<< HEAD
  * Adds an entry to the audit log
  * @param entry The audit log entry to add
  * @returns A Promise that resolves when the entry is saved
@@ -316,3 +325,23 @@ export function getToolNameById(toolId: string): string {
   const tool = AVAILABLE_TOOLS.find(t => t.id === toolId);
   return tool ? tool.name : toolId;
 }
+=======
+ * Gets the WebSocket host
+ * @returns A Promise that resolves with the host
+ */
+export async function getHost(): Promise<string> {
+  const config = await getConfig();
+  return config.host || "localhost";
+}
+
+/**
+ * Sets the WebSocket host
+ * @param host The host to connect to
+ * @returns A Promise that resolves when the setting is saved
+ */
+export async function setHost(host: string): Promise<void> {
+  const config = await getConfig();
+  config.host = host;
+  await saveConfig(config);
+}
+>>>>>>> feature/remote-mcp-server-connection

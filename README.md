@@ -58,6 +58,7 @@ https://github.com/eyalzh/browser-control-mcp/releases/download/v1.5.1/mcp-serve
 
 To build from code, clone this repository, then run the following commands in the main repository directory to build both the MCP server and the browser extension.
 ```
+<<<<<<< HEAD
 npm install
 npm run build
 ```
@@ -65,6 +66,17 @@ npm run build
 #### Installing a Firefox Temporary Add-on 
 
 To install the extension on Firefox as a Temporary Add-on:
+=======
+pnpm install
+pnpm install --prefix mcp-server
+pnpm install --prefix firefox-extension
+pnpm run build
+```
+
+### Installing the Firefox extension
+
+To install the extension:
+>>>>>>> feature/remote-mcp-server-connection
 
 1. Type `about:debugging` in the Firefox URL bar
 2. Click on "This Firefox"
@@ -83,20 +95,25 @@ After installing the browser extension, add the following configuration to your 
 ```json
 {
     "mcpServers": {
-        "browser-control": {
-            "command": "node",
+        "firefox-mcp": {
+            "command": "npx",
             "args": [
-                "/path/to/repo/mcp-server/dist/server.js"
+                "-y",
+                "@delorenj/browser-control-firefox",
             ],
             "env": {
+<<<<<<< HEAD
                 "EXTENSION_SECRET": "<secret_on_firefox_extension_options_page>",
                 "EXTENSION_PORT": "8089" 
+=======
+                "EXTENSION_SECRET": "<secret_from_extension>",
+                "EXTENSION_PORT": "8089"
+>>>>>>> feature/remote-mcp-server-connection
             }
         }
     }
 }
 ```
-Replace `/path/to/repo` with the correct path.
 
 Set the EXTENSION_SECRET to the value shown on the extension's preferences page in Firefox (you can access it at `about:addons`). You can also set the EXTENSION_PORT environment variable to specify the port that the MCP server will use to communicate with the extension (default is 8089).
 
@@ -129,4 +146,32 @@ and use the following mcpServers configuration:
     }
 }
 ```
+
+## Remote Connection Configuration
+
+By default, the extension connects to the MCP server on `localhost`. However, you can configure it to connect to a remote MCP server:
+
+1. Open the extension preferences page (from `about:addons` in Firefox)
+2. In the "WebSocket Connection" section, enter the host (IP address or hostname) of your remote MCP server
+3. Configure the port(s) as needed
+4. Click "Save Connection Settings" - the extension will reload automatically
+
+### Security Considerations for Remote Connections
+
+When connecting to a remote MCP server:
+
+- **Use a secure network**: Only connect to MCP servers on trusted networks (e.g., your local LAN)
+- **Avoid public internet exposure**: Do not expose your MCP server directly to the public internet
+- **Consider using a VPN**: For remote access over the internet, use a VPN to secure the connection
+- **Future enhancement**: Support for secure WebSocket connections (wss://) is planned for a future update
+
+### Example Remote Configurations
+
+**Local network connection:**
+- Host: `192.168.1.100`
+- Port: `8089`
+
+**Domain-based connection:**
+- Host: `mcp-server.local`
+- Port: `8089`
 
