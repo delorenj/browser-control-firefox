@@ -92,13 +92,8 @@ After installing the browser extension, add the following configuration to your 
                 "@delorenj/browser-control-firefox",
             ],
             "env": {
-<<<<<<< HEAD
-                "EXTENSION_SECRET": "<secret_on_firefox_extension_options_page>",
-                "EXTENSION_PORT": "8089" 
-=======
                 "EXTENSION_SECRET": "<secret_from_extension>",
                 "EXTENSION_PORT": "8089"
->>>>>>> feature/remote-mcp-server-connection
             }
         }
     }
