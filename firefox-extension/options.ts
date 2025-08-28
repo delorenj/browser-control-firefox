@@ -607,12 +607,8 @@ document.addEventListener("DOMContentLoaded", () => {
   loadSecret();
   createToolSettingsUI();
   loadDomainLists();
-<<<<<<< HEAD
-  loadPorts();
-  loadAuditLog();
-=======
   loadConnectionSettings();
->>>>>>> feature/remote-mcp-server-connection
+  loadAuditLog();
   initializeCollapsibleSections();
 
   // Ensure modal is hidden by default
