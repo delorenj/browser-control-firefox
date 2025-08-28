@@ -83,11 +83,8 @@ export interface ExtensionConfig {
   toolSettings?: ToolSettings;
   domainDenyList?: string[];
   ports: number[];
-<<<<<<< HEAD
   auditLog?: AuditLogEntry[];
-=======
   host?: string;
->>>>>>> feature/remote-mcp-server-connection
 }
 
 /**
