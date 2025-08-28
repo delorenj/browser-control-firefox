@@ -601,12 +601,8 @@ function hidePermissionModal() {
 // Initialize the page
 copyButton.addEventListener("click", copyToClipboard);
 saveDomainListsButton.addEventListener("click", saveDomainLists);
-<<<<<<< HEAD
-savePortsButton.addEventListener("click", savePorts);
-clearAuditLogButton.addEventListener("click", handleClearAuditLog);
-=======
 saveConnectionButton.addEventListener("click", saveConnectionSettings);
->>>>>>> feature/remote-mcp-server-connection
+clearAuditLogButton.addEventListener("click", handleClearAuditLog);
 document.addEventListener("DOMContentLoaded", () => {
   loadSecret();
   createToolSettingsUI();
