@@ -1,12 +1,7 @@
 {
   "name": "browser-control-mcp",
-<<<<<<< HEAD
-  "version": "1.5.0",
-  "private": true,
-=======
   "version": "2.0.0",
   "private": false,
->>>>>>> feature/remote-mcp-server-connection
   "scripts": {
     "postinstall": "npm install --prefix mcp-server && npm install --prefix firefox-extension",
     "build": "nx run-many --target=build --all --parallel"
