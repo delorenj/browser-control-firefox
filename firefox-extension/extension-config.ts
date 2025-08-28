@@ -271,7 +271,6 @@ export async function setPorts(ports: number[]): Promise<void> {
 }
 
 /**
-<<<<<<< HEAD
  * Adds an entry to the audit log
  * @param entry The audit log entry to add
  * @returns A Promise that resolves when the entry is saved
@@ -322,7 +321,8 @@ export function getToolNameById(toolId: string): string {
   const tool = AVAILABLE_TOOLS.find(t => t.id === toolId);
   return tool ? tool.name : toolId;
 }
-=======
+
+/**
  * Gets the WebSocket host
  * @returns A Promise that resolves with the host
  */
@@ -341,4 +341,3 @@ export async function setHost(host: string): Promise<void> {
   config.host = host;
   await saveConfig(config);
 }
->>>>>>> feature/remote-mcp-server-connection
