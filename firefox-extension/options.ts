@@ -10,14 +10,11 @@ import {
   setDomainDenyList,
   getPorts,
   setPorts,
-<<<<<<< HEAD
   getAuditLog,
   clearAuditLog,
   getToolNameById,
-=======
   getHost,
   setHost,
->>>>>>> feature/remote-mcp-server-connection
 } from "./extension-config";
 
 const secretDisplay = document.getElementById(
