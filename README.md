@@ -58,15 +58,6 @@ https://github.com/eyalzh/browser-control-mcp/releases/download/v1.5.1/mcp-serve
 
 To build from code, clone this repository, then run the following commands in the main repository directory to build both the MCP server and the browser extension.
 ```
-<<<<<<< HEAD
-npm install
-npm run build
-```
-
-#### Installing a Firefox Temporary Add-on 
-
-To install the extension on Firefox as a Temporary Add-on:
-=======
 pnpm install
 pnpm install --prefix mcp-server
 pnpm install --prefix firefox-extension
@@ -76,7 +67,6 @@ pnpm run build
 ### Installing the Firefox extension
 
 To install the extension:
->>>>>>> feature/remote-mcp-server-connection
 
 1. Type `about:debugging` in the Firefox URL bar
 2. Click on "This Firefox"
